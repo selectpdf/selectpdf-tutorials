@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using SelectPdf;
@@ -102,7 +103,18 @@ namespace SelectPdfExamples.HtmlToPdfTutorial
             System.Drawing.Image[] images = rasterizer.ConvertToImages();
             try
             {
-                images[0].Save(imagePath, ImageFormat.Png);
+                // Frame the preview with a light border so white pages don't blend into a white page.
+                const int b = 3;
+                using (Bitmap framed = new Bitmap(images[0].Width + 2 * b, images[0].Height + 2 * b))
+                {
+                    using (Graphics g = Graphics.FromImage(framed))
+                    {
+                        g.Clear(Color.FromArgb(0xCC, 0xCC, 0xCC));
+                        // Draw into an explicit pixel rectangle so the source DPI is ignored.
+                        g.DrawImage(images[0], new Rectangle(b, b, images[0].Width, images[0].Height));
+                    }
+                    framed.Save(imagePath, ImageFormat.Png);
+                }
             }
             finally
             {
