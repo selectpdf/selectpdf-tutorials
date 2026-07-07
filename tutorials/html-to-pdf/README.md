@@ -83,7 +83,7 @@ doc.Close();
 
 **Output:**
 
-![Convert an HTML string to PDF](images/html-to-pdf-section01.png)
+<a href="images/html-to-pdf-section01.png"><img src="images/html-to-pdf-section01.png" alt="Convert an HTML string to PDF" width="360"></a>
 
 > Full source: [Section01_HtmlStringToPdf.cs](Section01_HtmlStringToPdf.cs)
 
@@ -104,7 +104,7 @@ doc.Close();
 
 **Output:**
 
-![Convert a URL to PDF](images/html-to-pdf-section02.png)
+<a href="images/html-to-pdf-section02.png"><img src="images/html-to-pdf-section02.png" alt="Convert a URL to PDF" width="360"></a>
 
 > Full source: [Section02_UrlToPdf.cs](Section02_UrlToPdf.cs)
 
@@ -126,7 +126,7 @@ doc.Close();
 
 **Output:**
 
-![Convert a local HTML file to PDF](images/html-to-pdf-section03.png)
+<a href="images/html-to-pdf-section03.png"><img src="images/html-to-pdf-section03.png" alt="Convert a local HTML file to PDF" width="360"></a>
 
 > Full source: [Section03_HtmlFileToPdf.cs](Section03_HtmlFileToPdf.cs)
 
@@ -169,7 +169,7 @@ doc.Close();
 
 **Output:**
 
-![Build an invoice from a template](images/html-to-pdf-section04.png)
+<a href="images/html-to-pdf-section04.png"><img src="images/html-to-pdf-section04.png" alt="Build an invoice from a template" width="360"></a>
 
 > Full source: [Section04_InvoiceTemplate.cs](Section04_InvoiceTemplate.cs)
 
@@ -195,7 +195,7 @@ doc.Close();
 
 **Output:**
 
-![Render complex HTML that paginates](images/html-to-pdf-section05.png)
+<a href="images/html-to-pdf-section05.png"><img src="images/html-to-pdf-section05.png" alt="Render complex HTML that paginates" width="360"></a>
 
 > Full source: [Section05_ComplexHtml.cs](Section05_ComplexHtml.cs)
 
@@ -227,7 +227,7 @@ doc.Close();
 
 **Output:**
 
-![Set page size, orientation and margins](images/html-to-pdf-section06.png)
+<a href="images/html-to-pdf-section06.png"><img src="images/html-to-pdf-section06.png" alt="Set page size, orientation and margins" width="360"></a>
 
 > Full source: [Section06_PageSettings.cs](Section06_PageSettings.cs)
 
@@ -263,7 +263,7 @@ doc.Close();
 
 **Output:**
 
-![Add headers and footers with page numbers](images/html-to-pdf-section07.png)
+<a href="images/html-to-pdf-section07.png"><img src="images/html-to-pdf-section07.png" alt="Add headers and footers with page numbers" width="360"></a>
 
 > Full source: [Section07_HeadersAndFooters.cs](Section07_HeadersAndFooters.cs)
 
@@ -296,7 +296,7 @@ doc.Close();
 
 **Output:**
 
-![Use HTML for headers and footers](images/html-to-pdf-section08.png)
+<a href="images/html-to-pdf-section08.png"><img src="images/html-to-pdf-section08.png" alt="Use HTML for headers and footers" width="360"></a>
 
 > Full source: [Section08_HtmlHeaderFooter.cs](Section08_HtmlHeaderFooter.cs)
 
@@ -325,7 +325,7 @@ doc.Close();
 
 **Output:**
 
-![Generate bookmarks from HTML headings](images/html-to-pdf-section09.png)
+<a href="images/html-to-pdf-section09.png"><img src="images/html-to-pdf-section09.png" alt="Generate bookmarks from HTML headings" width="360"></a>
 
 > Full source: [Section09_Bookmarks.cs](Section09_Bookmarks.cs)
 
@@ -351,7 +351,7 @@ doc.Close();
 
 **Output:**
 
-![Produce a single-page PDF](images/html-to-pdf-section10.png)
+<a href="images/html-to-pdf-section10.png"><img src="images/html-to-pdf-section10.png" alt="Produce a single-page PDF" width="360"></a>
 
 > Full source: [Section10_SinglePagePdf.cs](Section10_SinglePagePdf.cs)
 
@@ -387,7 +387,7 @@ doc.Close();
 
 **Output:**
 
-![Add a watermark to every page](images/html-to-pdf-section11.png)
+<a href="images/html-to-pdf-section11.png"><img src="images/html-to-pdf-section11.png" alt="Add a watermark to every page" width="360"></a>
 
 > Full source: [Section11_Watermark.cs](Section11_Watermark.cs)
 
@@ -417,7 +417,7 @@ doc.Close();
 
 **Output:**
 
-![Wait for JavaScript-rendered content](images/html-to-pdf-section12.png)
+<a href="images/html-to-pdf-section12.png"><img src="images/html-to-pdf-section12.png" alt="Wait for JavaScript-rendered content" width="360"></a>
 
 > Full source: [Section12_WaitForJavaScript.cs](Section12_WaitForJavaScript.cs)
 
@@ -448,7 +448,7 @@ doc.Close();
 
 **Output:**
 
-![Inject custom CSS and run a script](images/html-to-pdf-section13.png)
+<a href="images/html-to-pdf-section13.png"><img src="images/html-to-pdf-section13.png" alt="Inject custom CSS and run a script" width="360"></a>
 
 > Full source: [Section13_CustomCssAndScript.cs](Section13_CustomCssAndScript.cs)
 
@@ -478,7 +478,7 @@ doc.Close();
 
 **Output:**
 
-![Control the browser viewport width](images/html-to-pdf-section14.png)
+<a href="images/html-to-pdf-section14.png"><img src="images/html-to-pdf-section14.png" alt="Control the browser viewport width" width="360"></a>
 
 > Full source: [Section14_ViewportWidth.cs](Section14_ViewportWidth.cs)
 
@@ -502,7 +502,7 @@ doc.Close();
 
 **Output:**
 
-![Send HTTP headers and cookies](images/html-to-pdf-section15.png)
+<a href="images/html-to-pdf-section15.png"><img src="images/html-to-pdf-section15.png" alt="Send HTTP headers and cookies" width="360"></a>
 
 > Full source: [Section15_HttpHeadersAndCookies.cs](Section15_HttpHeadersAndCookies.cs)
 
@@ -532,7 +532,7 @@ doc.Close();
 
 **Output:**
 
-![Set the document properties](images/html-to-pdf-section16.png)
+<a href="images/html-to-pdf-section16.png"><img src="images/html-to-pdf-section16.png" alt="Set the document properties" width="360"></a>
 
 > Full source: [Section16_DocumentProperties.cs](Section16_DocumentProperties.cs)
 
@@ -560,7 +560,7 @@ doc.Close();
 
 **Output:**
 
-![Password-protect and restrict permissions](images/html-to-pdf-section17.png)
+<a href="images/html-to-pdf-section17.png"><img src="images/html-to-pdf-section17.png" alt="Password-protect and restrict permissions" width="360"></a>
 
 > Full source: [Section17_PasswordProtection.cs](Section17_PasswordProtection.cs)
 
@@ -587,7 +587,7 @@ doc.Close();
 
 **Output:**
 
-![Create an archivable PDF/A-3 document](images/html-to-pdf-section18.png)
+<a href="images/html-to-pdf-section18.png"><img src="images/html-to-pdf-section18.png" alt="Create an archivable PDF/A-3 document" width="360"></a>
 
 > Full source: [Section18_PdfA3.cs](Section18_PdfA3.cs)
 
@@ -620,7 +620,7 @@ public sealed class InvoiceController : ControllerBase
 
 **Output:**
 
-![Generate a PDF in ASP.NET Core](images/html-to-pdf-section19.png)
+<a href="images/html-to-pdf-section19.png"><img src="images/html-to-pdf-section19.png" alt="Generate a PDF in ASP.NET Core" width="360"></a>
 
 > Full source: [Section19_AspNetCore.cs](Section19_AspNetCore.cs)
 
