@@ -1,0 +1,11 @@
+# Build output
+bin/
+obj/
+
+# Result PDFs are produced when you run a tutorial; keep them out of source control.
+# (Preview images under images/ ARE committed so the README can display them.)
+**/output/*.pdf
+
+# VS / user
+.vs/
+*.user

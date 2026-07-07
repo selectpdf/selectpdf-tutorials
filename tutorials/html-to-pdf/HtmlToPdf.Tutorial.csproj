@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>SelectPdfExamples.HtmlToPdfTutorial</RootNamespace>
+    <AssemblyName>HtmlToPdf.Tutorial</AssemblyName>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <!--
+    The SelectPdf commercial library, published on nuget.org.
+    Select.Pdf.NetCore                  - managed library
+    Select.Pdf.NetCore.Chromium.Windows - Chromium (CEF) rendering engine
+  -->
+  <ItemGroup>
+    <PackageReference Include="Select.Pdf.NetCore" Version="26.3.0" />
+    <PackageReference Include="Select.Pdf.NetCore.Chromium.Windows" Version="26.3.0" />
+  </ItemGroup>
+
+  <!-- Only needed so the ASP.NET Core controller example compiles in this console project. -->
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+</Project>
