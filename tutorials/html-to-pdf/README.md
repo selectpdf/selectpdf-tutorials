@@ -460,9 +460,8 @@ Set the virtual browser width the HTML is laid out at, then shrink oversized lay
 HtmlToPdf converter = new HtmlToPdf();
 converter.Options.RenderingEngine = RenderingEngine.Chromium;
 
-// Lay the HTML out at a fixed 1200px browser width...
+// Lay the HTML out at a 1200px browser width...
 converter.Options.WebPageWidth = 1200;
-converter.Options.WebPageFixedSize = true;
 
 // ...then shrink it so the wide layout fits the PDF page width.
 converter.Options.AutoFitWidth = HtmlToPdfPageFitMode.ShrinkOnly;
