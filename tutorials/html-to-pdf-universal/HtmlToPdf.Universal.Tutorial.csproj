@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>SelectPdfExamples.HtmlToPdfUniversalTutorial</RootNamespace>
+    <AssemblyName>HtmlToPdf.Universal.Tutorial</AssemblyName>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <!--
+    SelectPdf.Universal, published on nuget.org. Each platform package installs the
+    library plus that platform's Chromium engine; the one matching the OS you build on
+    is picked below, so the same project builds on Windows, Linux (x64 / ARM64) and macOS.
+    In your own app reference just the one you deploy to, for example:
+      dotnet add package SelectPdf.Universal.Linux
+  -->
+  <PropertyGroup>
+    <HostArch>$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)</HostArch>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="SelectPdf.Universal.Windows" Version="26.5.0" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
+    <PackageReference Include="SelectPdf.Universal.Linux" Version="26.5.0" Condition="$([MSBuild]::IsOSPlatform('Linux')) And '$(HostArch)' != 'Arm64'" />
+    <PackageReference Include="SelectPdf.Universal.Linux.Arm64" Version="26.5.0" Condition="$([MSBuild]::IsOSPlatform('Linux')) And '$(HostArch)' == 'Arm64'" />
+    <PackageReference Include="SelectPdf.Universal.MacOS" Version="26.5.0" Condition="$([MSBuild]::IsOSPlatform('OSX'))" />
+  </ItemGroup>
+
+  <!-- Only used by Program.cs to frame the preview images; SelectPdf already depends on it. -->
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" Version="3.119.4" />
+  </ItemGroup>
+
+  <!-- Only needed so the ASP.NET Core controller example compiles in this console project. -->
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+</Project>
