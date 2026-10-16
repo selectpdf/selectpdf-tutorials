@@ -4,7 +4,7 @@ using SelectPdf;
 namespace SelectPdfExamples.HtmlToPdfTutorial
 {
     /// <summary>Encrypts the PDF with an owner password and restricts permissions.</summary>
-    public static class Section17_PasswordProtection
+    public static class Section18_PasswordProtection
     {
         public static string Run(string outputDir)
         {

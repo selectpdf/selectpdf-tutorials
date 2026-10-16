@@ -16,6 +16,17 @@ namespace SelectPdfExamples.HtmlToPdfTutorial
             public decimal Total => Qty * UnitPrice;
         }
 
+        /// <summary>The sample invoice data, shared with the e-invoice in section 20.</summary>
+        private static LineItem[] SampleItems() => new[]
+        {
+            new LineItem { Description = "SelectPdf Developer License", Qty = 1, UnitPrice = 499m },
+            new LineItem { Description = "Priority Support (1 year)",    Qty = 1, UnitPrice = 199m },
+            new LineItem { Description = "On-site training (per day)",    Qty = 2, UnitPrice = 900m },
+        };
+
+        /// <summary>The sample invoice rendered to HTML, reused by section 20.</summary>
+        internal static string BuildSampleInvoiceHtml() => BuildInvoiceHtml("INV-1042", SampleItems());
+
         public static string Run(string outputDir)
         {
             string outputPdf = Path.Combine(outputDir, "invoice.pdf");

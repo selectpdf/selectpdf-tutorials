@@ -4,7 +4,7 @@ using SelectPdf;
 namespace SelectPdfExamples.HtmlToPdfTutorial
 {
     /// <summary>Produces an archivable PDF/A-3B document (requires the Chromium engine).</summary>
-    public static class Section18_PdfA3
+    public static class Section19_PdfA3
     {
         public static string Run(string outputDir)
         {

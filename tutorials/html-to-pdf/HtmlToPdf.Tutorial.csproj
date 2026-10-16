@@ -16,8 +16,8 @@
     Select.Pdf.NetCore.Chromium.Windows - Chromium (CEF) rendering engine
   -->
   <ItemGroup>
-    <PackageReference Include="Select.Pdf.NetCore" Version="26.3.0" />
-    <PackageReference Include="Select.Pdf.NetCore.Chromium.Windows" Version="26.3.0" />
+    <PackageReference Include="Select.Pdf.NetCore" Version="26.5.0" />
+    <PackageReference Include="Select.Pdf.NetCore.Chromium.Windows" Version="26.5.0" />
   </ItemGroup>
 
   <!-- Only needed so the ASP.NET Core controller example compiles in this console project. -->

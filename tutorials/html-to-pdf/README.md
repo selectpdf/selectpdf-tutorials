@@ -1,6 +1,6 @@
 # HTML to PDF in C#
 
-This is a complete, hands-on guide to converting HTML to PDF in C# with the [SelectPdf library for .NET](https://selectpdf.com/pdf-library-for-net/). It works up from a three-line conversion to a production-ready workflow: every one of the 19 code steps is a full, compiling example taken straight from this project and rendered with the Chromium engine, so the code you copy is code that actually runs. Along the way you will build a real invoice from a data model, render complex CSS and paginating tables, control layout, handle dynamic and authenticated pages, secure and archive your output, integrate with ASP.NET Core, and finish with notes on running in production and troubleshooting.
+This is a complete, hands-on guide to converting HTML to PDF in C# with the [SelectPdf library for .NET](https://selectpdf.com/pdf-library-for-net/). It works up from a three-line conversion to a production-ready workflow: every one of the 22 code steps is a full, compiling example taken straight from this project and rendered with the Chromium engine, so the code you copy is code that actually runs. Along the way you will build a real invoice from a data model, render complex CSS and paginating tables, control layout, handle dynamic and authenticated pages, secure and archive your output, integrate with ASP.NET Core, and finish with notes on running in production and troubleshooting.
 
 ## Getting started
 
@@ -43,22 +43,25 @@ Running the project writes each result PDF to `output/` and the preview images s
 13. [Inject custom CSS and run a script](#13-inject-custom-css-and-run-a-script)
 14. [Control the browser viewport width](#14-control-the-browser-viewport-width)
 15. [Send HTTP headers and cookies](#15-send-http-headers-and-cookies)
+16. [Convert only part of a page](#16-convert-only-part-of-a-page)
 
 **Part 5 - Secure, archive, integrate**
 
-16. [Set the document properties](#16-set-the-document-properties)
-17. [Password-protect and restrict permissions](#17-passwordprotect-and-restrict-permissions)
-18. [Create an archivable PDF/A-3 document](#18-create-an-archivable-pdfa3-document)
-19. [Generate a PDF in ASP.NET Core](#19-generate-a-pdf-in-aspnet-core)
+17. [Set the document properties](#17-set-the-document-properties)
+18. [Password-protect and restrict permissions](#18-passwordprotect-and-restrict-permissions)
+19. [Create an archivable PDF/A-3 document](#19-create-an-archivable-pdfa3-document)
+20. [Create a ZUGFeRD / Factur-X e-invoice](#20-create-a-zugferd--facturx-einvoice)
+21. [Add custom XMP metadata](#21-add-custom-xmp-metadata)
+22. [Generate a PDF in ASP.NET Core](#22-generate-a-pdf-in-aspnet-core)
 
 **Part 6 - Run it in production**
 
-20. [Running in production](#20-running-in-production)
-21. [Troubleshooting](#21-troubleshooting)
+23. [Running in production](#23-running-in-production)
+24. [Troubleshooting](#24-troubleshooting)
 
 **FAQ**
 
-22. [Frequently asked questions](#22-frequently-asked-questions)
+25. [Frequently asked questions](#25-frequently-asked-questions)
 
 ## Part 1 - Getting started
 
@@ -479,6 +482,8 @@ doc.Close();
 
 <a href="images/html-to-pdf-section14.png"><img src="images/html-to-pdf-section14.png" alt="Control the browser viewport width" width="360"></a>
 
+To capture only the top of a long page, also set `WebPageHeight` and `WebPageFixedSize = true`. The content below that height is left out of the PDF. Since v26.4 the Chromium and Blink engines honor this too; earlier versions supported it only on WebKit.
+
 > Full source: [Section14_ViewportWidth.cs](Section14_ViewportWidth.cs)
 
 ### 15. Send HTTP headers and cookies
@@ -505,9 +510,46 @@ doc.Close();
 
 > Full source: [Section15_HttpHeadersAndCookies.cs](Section15_HttpHeadersAndCookies.cs)
 
+### 16. Convert only part of a page
+
+Convert just one element of a page - a report card, a chart, a table - picked with a CSS selector, leaving the navigation, sidebar and footer out.
+
+```csharp
+HtmlToPdf converter = new HtmlToPdf();
+converter.Options.RenderingEngine = RenderingEngine.Chromium;
+
+// Convert only the element matched by this CSS selector - the navigation,
+// sidebar and footer around it are left out. A selector that matches
+// nothing fails the conversion instead of converting the whole page.
+converter.Options.VisibleWebElementSelector = "main .summary";
+
+PdfDocument doc = converter.ConvertHtmlString(
+    "<nav style='background:#1f2933;color:#fff;padding:12px'>Home | Reports | Settings</nav>" +
+    "<aside style='float:right;width:200px;background:#f3f4f6;padding:12px'>Sidebar links</aside>" +
+    "<main>" +
+    "  <p>Intro text that should not be in the PDF.</p>" +
+    "  <section class='summary' style='font-family:Arial;border:2px solid #b45309;padding:16px'>" +
+    "    <h1 style='color:#b45309'>Q3 summary</h1>" +
+    "    <p>Revenue grew 12% quarter on quarter.</p>" +
+    "  </section>" +
+    "</main>" +
+    "<footer>Copyright footer</footer>");
+
+doc.Save(outputPdf);
+doc.Close();
+```
+
+Any selector the browser understands works - `#content`, `.infobox`, `table.wikitable tbody`. `VisibleWebElementSelector` is honored by the Chromium and Blink engines and produces a real, selectable PDF (since v26.4). The WebKit engines take an element id instead, through `VisibleWebElementId`, which every engine honors.
+
+**Output:**
+
+<a href="images/html-to-pdf-section16.png"><img src="images/html-to-pdf-section16.png" alt="Convert only part of a page" width="360"></a>
+
+> Full source: [Section16_PartialPage.cs](Section16_PartialPage.cs)
+
 ## Part 5 - Secure, archive, integrate
 
-### 16. Set the document properties
+### 17. Set the document properties
 
 Fill in the PDF title, author, subject and keywords shown in the viewer and used by search indexes.
 
@@ -531,11 +573,11 @@ doc.Close();
 
 **Output:**
 
-<a href="images/html-to-pdf-section16.png"><img src="images/html-to-pdf-section16.png" alt="Set the document properties" width="360"></a>
+<a href="images/html-to-pdf-section17.png"><img src="images/html-to-pdf-section17.png" alt="Set the document properties" width="360"></a>
 
-> Full source: [Section16_DocumentProperties.cs](Section16_DocumentProperties.cs)
+> Full source: [Section17_DocumentProperties.cs](Section17_DocumentProperties.cs)
 
-### 17. Password-protect and restrict permissions
+### 18. Password-protect and restrict permissions
 
 Encrypt the PDF with an owner password and disable copying and editing.
 
@@ -559,11 +601,11 @@ doc.Close();
 
 **Output:**
 
-<a href="images/html-to-pdf-section17.png"><img src="images/html-to-pdf-section17.png" alt="Password-protect and restrict permissions" width="360"></a>
+<a href="images/html-to-pdf-section18.png"><img src="images/html-to-pdf-section18.png" alt="Password-protect and restrict permissions" width="360"></a>
 
-> Full source: [Section17_PasswordProtection.cs](Section17_PasswordProtection.cs)
+> Full source: [Section18_PasswordProtection.cs](Section18_PasswordProtection.cs)
 
-### 18. Create an archivable PDF/A-3 document
+### 19. Create an archivable PDF/A-3 document
 
 Emit a PDF/A-3B file suitable for long-term archiving and compliance.
 
@@ -586,11 +628,87 @@ doc.Close();
 
 **Output:**
 
-<a href="images/html-to-pdf-section18.png"><img src="images/html-to-pdf-section18.png" alt="Create an archivable PDF/A-3 document" width="360"></a>
+<a href="images/html-to-pdf-section19.png"><img src="images/html-to-pdf-section19.png" alt="Create an archivable PDF/A-3 document" width="360"></a>
 
-> Full source: [Section18_PdfA3.cs](Section18_PdfA3.cs)
+PdfA3B is the basic conformance level. Use `PdfStandard.PdfA3U` when all text must map to Unicode, or `PdfStandard.PdfA3A` for the accessible level, which adds a tagged logical structure. As of v26.5, tagged PDF/A-3a and PDF/UA-1 conversions of real-world web pages pass veraPDF validation.
 
-### 19. Generate a PDF in ASP.NET Core
+> Full source: [Section19_PdfA3.cs](Section19_PdfA3.cs)
+
+### 20. Create a ZUGFeRD / Factur-X e-invoice
+
+Turn the invoice from section 4 into a hybrid electronic invoice: a PDF/A-3 file that people read as a normal invoice and accounting software reads from the embedded XML.
+
+```csharp
+HtmlToPdf converter = new HtmlToPdf();
+converter.Options.RenderingEngine = RenderingEngine.Chromium;
+
+// A hybrid e-invoice is carried in a PDF/A-3 document (PdfA3B, PdfA3U or PdfA3A).
+converter.Options.PdfStandard = PdfStandard.PdfA3B;
+
+// The visible invoice - the same HTML template as section 4.
+PdfDocument doc = converter.ConvertHtmlString(html);
+doc.DocumentInformation.Title = "Invoice INV-1042";
+
+// Embed the machine-readable invoice XML. The library names the file
+// (factur-x.xml), links it as a PDF/A-3 associated file and writes the
+// Factur-X metadata that invoice software looks for.
+// MINIMUM carries less than the visible page, so the relationship is Data;
+// use Alternative when the XML and the page carry exactly the same content.
+doc.AddZugferdInvoice(invoiceXml, ZugferdProfile.Minimum, PdfAttachmentRelationship.Data);
+
+doc.Save(outputPdf);
+doc.Close();
+```
+
+The invoice XML is [assets/factur-x.xml](assets/factur-x.xml), a Cross Industry Invoice in the MINIMUM profile. Choose the profile that matches your XML: `Minimum`, `BasicWL`, `Basic`, `En16931`, `Extended` or `XRechnung`. For XRechnung the embedded file is named `xrechnung.xml`. In Germany, the BASIC, EN 16931, EXTENDED and XRECHNUNG profiles must use `PdfAttachmentRelationship.Alternative`. Factur-X 1.0 metadata is written by default. Pass `ZugferdSchema.Zugferd20` as a fourth argument only for recipients that still require the deprecated ZUGFeRD 2.0 schema.
+
+**Output:**
+
+<a href="images/html-to-pdf-section20.png"><img src="images/html-to-pdf-section20.png" alt="Create a ZUGFeRD / Factur-X e-invoice" width="360"></a>
+
+> Full source: [Section20_ZugferdInvoice.cs](Section20_ZugferdInvoice.cs)
+
+### 21. Add custom XMP metadata
+
+Store your own fields - a document id, a department, a retention date - in the file's XMP metadata, without breaking PDF/A conformance.
+
+```csharp
+HtmlToPdf converter = new HtmlToPdf();
+converter.Options.RenderingEngine = RenderingEngine.Chromium;
+converter.Options.PdfStandard = PdfStandard.PdfA3B;
+
+PdfDocument doc = converter.ConvertHtmlString(
+    "<h1>Contract 2026-117</h1>" +
+    "<p>Records-management fields are stored in the document's XMP metadata.</p>");
+doc.DocumentInformation.Title = "Contract 2026-117";
+
+// PDF/A only allows metadata from schemas it predefines, unless the schema is
+// described inside the XMP packet. AddXmpExtensionSchema writes both the schema
+// declaration and the values, so the file stays PDF/A-conformant.
+doc.AddXmpExtensionSchema(
+    "acme",                                   // namespace prefix
+    "http://ns.acme.example/records/1.0/",     // namespace URI
+    "Acme records management",                // human-readable schema name
+    new Dictionary<string, string>
+    {
+        { "DocumentId", "CTR-2026-117" },
+        { "Department", "Legal" },
+        { "RetainUntil", "2036-12-31" },
+    });
+
+doc.Save(outputPdf);
+doc.Close();
+```
+
+Document-management and records systems can read these values straight from the file. For e-invoices you don't need this method, because `AddZugferdInvoice` writes the Factur-X schema itself.
+
+**Output:**
+
+<a href="images/html-to-pdf-section21.png"><img src="images/html-to-pdf-section21.png" alt="Add custom XMP metadata" width="360"></a>
+
+> Full source: [Section21_XmpMetadata.cs](Section21_XmpMetadata.cs)
+
+### 22. Generate a PDF in ASP.NET Core
 
 Build the PDF in a controller action and stream it straight to the browser as a downloadable file.
 
@@ -619,15 +737,15 @@ public sealed class InvoiceController : ControllerBase
 
 **Output:**
 
-<a href="images/html-to-pdf-section19.png"><img src="images/html-to-pdf-section19.png" alt="Generate a PDF in ASP.NET Core" width="360"></a>
+<a href="images/html-to-pdf-section22.png"><img src="images/html-to-pdf-section22.png" alt="Generate a PDF in ASP.NET Core" width="360"></a>
 
-> Full source: [Section19_AspNetCore.cs](Section19_AspNetCore.cs)
+> Full source: [Section22_AspNetCore.cs](Section22_AspNetCore.cs)
 
 ## Part 6 - Run it in production
 
-### 20. Running in production
+### 23. Running in production
 
-SelectPdf runs entirely in-process and is Windows-only (x86 and x64) - there is no Linux or macOS build, and the host needs full trust. Factor that into your hosting choice before you commit.
+This library (the classic SelectPdf for .NET) runs entirely in-process and is Windows-only (x86 and x64), and the host needs full trust. For Linux, macOS or Docker, use [SelectPdf.Universal](https://selectpdf.com/pdf-library-cross-platform/), the cross-platform edition - the [Universal tutorial](../html-to-pdf-universal/) covers the same steps. The same license covers both. Factor that into your hosting choice before you commit.
 
 A converter instance is not thread-safe: create one HtmlToPdf per conversion rather than sharing one across threads, and cap parallelism with your own queue or semaphore - the library has no built-in concurrency limit.
 
@@ -639,7 +757,7 @@ A converter instance is not thread-safe: create one HtmlToPdf per conversion rat
 - **Untrusted HTML** - disable scripts (Options.JavaScriptEnabled = false) and local file access (Options.DenyLocalFileAccess = true) when converting input you do not control.
 - **Azure** - App Service needs the Chromium engine (v26.2+, Basic plan or above); Virtual Machines and Cloud Services have no restrictions.
 
-### 21. Troubleshooting
+### 24. Troubleshooting
 
 A handful of problems come up again and again - here is the quick fix for each.
 
@@ -650,13 +768,16 @@ A handful of problems come up again and again - here is the quick fix for each.
 - **Navigation timeout** - the page is slower than 60s, the URL is not resolvable from the server, or a proxy is required - raise MaxPageLoadTime or set Options.ProxyOptions.
 - **An image splits across two pages** - set Options.KeepImagesTogether = true, or style the img with page-break-inside: avoid.
 - **OutOfMemoryException** - an image-heavy page - use the x64 package and optimize the images.
+- **A WebGL map or 3D chart is blank** - WebGL is off by default on the Chromium and Blink engines (since v26.4) because that makes conversions faster. Set Options.WebGlEnabled = true for pages that need it.
+- **The last page is cut in the wrong place** - with Chromium, the last page ends where the content ends. Set Options.ManagedContentTrimmingMode = ManagedContentTrimmingMode.Marker for the pre-26.4 cut, or Options.ManagedContentTrimming = false to turn this off.
+- **Web fonts, fetch calls or file:// images behave differently in an HTML string (v26.5+)** - when you pass an http(s) base URL, the page now runs with that origin, as if the URL itself were converted. As a result, absolute file:// resources are refused. Use an empty or file:// base URL for local resources.
 
 ## FAQ
 
-### 22. Frequently asked questions
+### 25. Frequently asked questions
 
 - **Is SelectPdf free?** - The [Community Edition](https://selectpdf.com/community-edition/) (Select.HtmlToPdf) is free for HTML to PDF with a 5-page cap. This tutorial uses the commercial [Select.Pdf library](https://selectpdf.com/pdf-library-for-net/) - a paid license with the full feature set and no page limit.
-- **Does it run on Linux, macOS or in Docker?** - No. The library is Windows-only (x86 and x64). To generate PDFs from Linux, host it on Windows or use the [SelectPdf online HTML-to-PDF REST API](https://selectpdf.com/html-to-pdf-api/) instead.
+- **Does it run on Linux, macOS or in Docker?** - Not this library: the classic SelectPdf is Windows-only (x86 and x64). [SelectPdf.Universal](https://selectpdf.com/pdf-library-cross-platform/) runs on Windows, Linux (x64 and ARM64), macOS on Apple Silicon and in Docker, keeps most of the same API, and is covered by the same license. If you're not on .NET, use the [SelectPdf online HTML-to-PDF REST API](https://selectpdf.com/html-to-pdf-api/).
 - **Which rendering engine should I use?** - Chromium (used throughout this tutorial) for modern HTML5, CSS3 and web fonts. WebKit is the embedded default with nothing extra to deploy; Blink is an alternative Chromium-based engine. Chromium and Blink each need their companion NuGet package.
 - **How do I remove the trial watermark?** - Set GlobalProperties.LicenseKey once at application startup, before any conversion. See [.NET library pricing](https://selectpdf.com/pricing/) for license options.
 - **Can it convert a page that requires login?** - Yes - send authentication cookies or headers (see Send HTTP headers and cookies), or post form data with HttpPostParameters.

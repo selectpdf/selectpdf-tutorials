@@ -5,7 +5,7 @@ using SelectPdf;
 namespace SelectPdfExamples.HtmlToPdfTutorial
 {
     /// <summary>Shows how to return a generated PDF from an ASP.NET Core controller action.</summary>
-    public static class Section19_AspNetCore
+    public static class Section22_AspNetCore
     {
         // Builds the preview image for this tutorial step (runs in the console runner).
         public static string Run(string outputDir)

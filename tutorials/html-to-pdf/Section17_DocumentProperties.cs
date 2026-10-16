@@ -5,7 +5,7 @@ using SelectPdf;
 namespace SelectPdfExamples.HtmlToPdfTutorial
 {
     /// <summary>Sets the PDF document properties (title, author, subject, keywords).</summary>
-    public static class Section16_DocumentProperties
+    public static class Section17_DocumentProperties
     {
         public static string Run(string outputDir)
         {

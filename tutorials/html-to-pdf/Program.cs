@@ -60,10 +60,13 @@ namespace SelectPdfExamples.HtmlToPdfTutorial
                 new Section { Id = "section13", Title = "Inject custom CSS and a script",        Run = Section13_CustomCssAndScript.Run },
                 new Section { Id = "section14", Title = "Control the viewport width",            Run = Section14_ViewportWidth.Run },
                 new Section { Id = "section15", Title = "Send HTTP headers and cookies",         Run = Section15_HttpHeadersAndCookies.Run },
-                new Section { Id = "section16", Title = "Set the document properties",           Run = Section16_DocumentProperties.Run },
-                new Section { Id = "section17", Title = "Password-protect and set permissions",  Run = Section17_PasswordProtection.Run },
-                new Section { Id = "section18", Title = "Create a PDF/A-3 archivable document",  Run = Section18_PdfA3.Run },
-                new Section { Id = "section19", Title = "Generate a PDF in ASP.NET Core",        Run = Section19_AspNetCore.Run },
+                new Section { Id = "section16", Title = "Convert only part of a page",           Run = Section16_PartialPage.Run },
+                new Section { Id = "section17", Title = "Set the document properties",           Run = Section17_DocumentProperties.Run },
+                new Section { Id = "section18", Title = "Password-protect and set permissions",  Run = Section18_PasswordProtection.Run },
+                new Section { Id = "section19", Title = "Create a PDF/A-3 archivable document",  Run = Section19_PdfA3.Run },
+                new Section { Id = "section20", Title = "Create a ZUGFeRD / Factur-X e-invoice", Run = Section20_ZugferdInvoice.Run },
+                new Section { Id = "section21", Title = "Add custom XMP metadata",               Run = Section21_XmpMetadata.Run },
+                new Section { Id = "section22", Title = "Generate a PDF in ASP.NET Core",        Run = Section22_AspNetCore.Run },
             };
 
             int failures = 0;
